@@ -7,23 +7,35 @@ public class VisualizeWav : MonoBehaviour
 {
     [Header("Waves")]
     [SerializeField]
-    bool sinusWave;
+    bool sinusWave = true;
     [SerializeField]
     bool cosinusWave;
 
     [Space(5)]
 
-    [Header("Points Settings")]
+    [Header("Point Settings")]
     [SerializeField]
-    float stepSize;
+    int length;
     [SerializeField]
-    float length;
+    float pointRadius;
     [SerializeField]
-    float pointSize;
+    Color pointColor = Color.white;
+    [SerializeField]
+    int startPointLeft;
+    [SerializeField]
+    float amplitude;
+
+    Vector2[] positions;
+
+    void Start()
+    {
+        positions = new Vector2[Mathf.FloorToInt(length / pointRadius)];
+    }
 
     void Update()
     {
-        Draw.StartLayer(Vector2.zero, 1, false);
-        Draw.Point(Vector2.zero, pointSize, Color.white);
+        Draw.StartLayer(Vector2.zero, 1f, false);
+
+        Draw.Point(Vector2.zero, pointRadius, pointColor);
     }
 }

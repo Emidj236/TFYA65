@@ -151,7 +151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cba10fe2f3dd047b47ebba667bf0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circumference: 0
+  sinusWave: 1
+  cosinusWave: 0
+  length: 15
+  pointRadius: 0.05
+  pointColor: {r: 1, g: 1, b: 1, a: 1}
+  startPointLeft: 9
+  amplitude: 2
+  speed: 5
 --- !u!4 &1588800224
 Transform:
   m_ObjectHideFlags: 0
