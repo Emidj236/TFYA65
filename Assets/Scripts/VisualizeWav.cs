@@ -12,6 +12,8 @@ public class VisualizeWav : MonoBehaviour
     bool showAudioFile = true;
     [SerializeField]
     float maxScale;
+    [SerializeField]
+    float minScale;
 
     [Header("Waves")]
     [SerializeField]
@@ -36,6 +38,7 @@ public class VisualizeWav : MonoBehaviour
     TextMeshPro cosinusText;
 
     AudioSource _audioSource;
+    [SerializeField]
     float[] samples = new float[512];
 
     void Start()
@@ -66,9 +69,11 @@ public class VisualizeWav : MonoBehaviour
 
     void DrawSpectrumData()
     {
-        for (int i = 0; i < samples.Length; i++)
+        for(int i = 0; i < samples.Length; i++)
         {
-            Draw.Quad(new Vector2(i * (length / samples.Length), 0), new Vector2(length / samples.Length, samples[i] * maxScale + 0.05f), pointColor);
+            // https://www.youtube.com/watch?v=Ri1uNPNlaVs
+            // Visualisera datan
+            Draw.Quad(new Vector2((-length / 2) + i * (length / (float)samples.Length), 0), new Vector2(length / (float)samples.Length, samples[i] * maxScale + minScale),pointColor);
         }
     }
 
@@ -95,7 +100,7 @@ public class VisualizeWav : MonoBehaviour
     {
         if(_bool)
         {
-            //_audioSource.Play();
+            _audioSource.Play();
         }
         showAudioFile = _bool;
     }
