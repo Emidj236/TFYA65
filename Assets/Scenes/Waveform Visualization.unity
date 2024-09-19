@@ -663,7 +663,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showAudioFile: 0
-  maxScale: 0
+  maxScale: 50
+  minScale: 0.01
   frequency: 10
   length: 10
   pointRadius: 0.05
