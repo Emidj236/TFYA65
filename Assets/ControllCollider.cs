@@ -12,7 +12,7 @@ public class ControllCollider : MonoBehaviour
 
     private void Update()
     {
-        simulation.obstacleCentre = new Vector2(-8.3f + amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2), 0);
+        simulation.obstacleCentre = new Vector2(amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2), 0 /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
     }
 
     public void SetHertz(string hertz)

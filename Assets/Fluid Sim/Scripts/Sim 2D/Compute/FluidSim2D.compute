@@ -4,6 +4,7 @@
 #pragma kernel CalculatePressureForce
 #pragma kernel CalculateViscosity
 #pragma kernel UpdatePositions
+#pragma kernel UpdateDensityDisplay
 
 // Includes
 #include "./FluidMaths2D.hlsl"
@@ -36,6 +37,9 @@ const float interactionInputRadius;
 
 const float2 obstacleSize;
 const float2 obstacleCentre;
+
+RWTexture2D<float> DensityTexture;
+uint2 DensityTexSize;
 
 float DensityKernel(float dst, float radius)
 {
@@ -179,6 +183,19 @@ void HandleCollisions(uint particleIndex)
 	// Update position and velocity
 	Positions[particleIndex] = pos;
 	Velocities[particleIndex] = vel;
+}
+
+[numthreads(8, 8, 1)]
+void UpdateDensityDisplay(uint3 id : SV_DispatchThreadID)
+{
+	if (id.x >= DensityTexSize.x || id.y >= DensityTexSize.x)
+		return;
+	
+	float2 posT = id.xy / float2(DensityTexSize.x, DensityTexSize.y);
+	float2 pos = -boundsSize / 2 + boundsSize * posT;
+	
+	DensityTexture[id.xy] = CalculateDensity(pos)[0];
+
 }
 
 [numthreads(NumThreads,1,1)]

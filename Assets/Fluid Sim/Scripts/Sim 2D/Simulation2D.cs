@@ -53,6 +53,7 @@ public class Simulation2D : MonoBehaviour
 
     public int numParticles { get; private set; }
 
+    public RenderTexture densityTexture;
 
     void Start()
     {
@@ -85,9 +86,13 @@ public class Simulation2D : MonoBehaviour
 
         compute.SetInt("numParticles", numParticles);
 
+        // Texturen
+        ComputeHelper.CreateRenderTexture(ref densityTexture, 1024, 1024);
+        compute.SetTexture(6, "DensityTexture", densityTexture);
+        compute.SetVector("DensityTexSize", new Vector2(densityTexture.width, densityTexture.height));
+
         gpuSort = new();
         gpuSort.SetBuffers(spatialIndices, spatialOffsets);
-
 
         // Init display
         display.Init(this);
@@ -144,7 +149,7 @@ public class Simulation2D : MonoBehaviour
         ComputeHelper.Dispatch(compute, numParticles, kernelIndex: pressureKernel);
         ComputeHelper.Dispatch(compute, numParticles, kernelIndex: viscosityKernel);
         ComputeHelper.Dispatch(compute, numParticles, kernelIndex: updatePositionKernel);
-
+        ComputeHelper.Dispatch(compute, densityTexture);
     }
 
     void UpdateSettings(float deltaTime)
