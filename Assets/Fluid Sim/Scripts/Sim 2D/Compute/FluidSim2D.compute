@@ -40,6 +40,8 @@ const float2 obstacleSize1;
 const float2 obstacleCentre1;
 const float2 obstacleSize2;
 const float2 obstacleCentre2;
+const float2 obstacleSize3;
+const float2 obstacleCentre3;
 
 RWTexture2D<float> DensityTexture;
 uint2 DensityTexSize;
@@ -200,6 +202,25 @@ void HandleCollisions(uint particleIndex)
 		else
 		{
 			pos.y = obstacleHalfSize2.y * sign(pos.y - obstacleCentre2.y) + obstacleCentre2.y;
+			vel.y *= -1 * collisionDamping;
+		}
+	}
+	
+	// Cube 3
+	// Collide particle against the test obstacle
+	const float2 obstacleHalfSize3 = obstacleSize3 * 0.5;
+	float2 obstacleEdgeDst3 = obstacleHalfSize3 - abs(pos - obstacleCentre3);
+
+	if (obstacleEdgeDst3.x >= 0 && obstacleEdgeDst3.y >= 0)
+	{
+		if (obstacleEdgeDst3.x < obstacleEdgeDst3.y)
+		{
+			pos.x = obstacleHalfSize3.x * sign(pos.x - obstacleCentre3.x) + obstacleCentre3.x;
+			vel.x *= -1 * collisionDamping;
+		}
+		else
+		{
+			pos.y = obstacleHalfSize3.y * sign(pos.y - obstacleCentre3.y) + obstacleCentre3.y;
 			vel.y *= -1 * collisionDamping;
 		}
 	}

@@ -7,13 +7,29 @@ public class ControllCollider : MonoBehaviour
     [SerializeField]
     Simulation2D simulation;
 
+    public bool changeScale;
+
     public int hZ;
     public float amplitude;
 
+    public bool pauseObject;
+
     private void Update()
     {
-        simulation.obstacleCentre1 = new Vector2(-5.0f + (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), 0 /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
-        simulation.obstacleCentre2 = new Vector2(5.0f + (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2 + Mathf.PI)), 0 /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
+        if (!pauseObject && !simulation.isPaused)
+        {
+            Time.timeScale = 1.0f;
+            simulation.obstacleCentre1 = new Vector2(-5.0f + (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), 0 /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
+            if (changeScale)
+            {
+                simulation.obstacleSize1 = new Vector2((amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)) /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
+            }
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
+        //simulation.obstacleCentre2 = new Vector2(5.0f + (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), 0 /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
     }
 
     public void SetHertz(string hertz)

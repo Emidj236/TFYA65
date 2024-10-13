@@ -1103,7 +1103,7 @@ MonoBehaviour:
   gradientResolution: 128
   velocityDisplayMax: 4
   densityDisplayMax: 120
-  densityDisplayMin: 55
+  densityDisplayMin: 70
 --- !u!114 &283901229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895837b52d5fc53409ded3589d4da696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleCount: 15000
+  particleCount: 20000
   initialVelocity: {x: 0, y: 0}
   spawnCentre: {x: 0, y: 0}
   spawnSize: {x: 18, y: 10}
@@ -1145,12 +1145,12 @@ MonoBehaviour:
   nearPressureMultiplier: 5
   viscosityStrength: 0
   boundsSize: {x: 18, y: 10}
-  obstacleSize1: {x: 1, y: 1}
+  obstacleSize1: {x: 3, y: 3}
   obstacleCentre1: {x: 0, y: 0}
-  obstacleSize2: {x: 1, y: 1}
-  obstacleCentre2: {x: 0, y: 2}
-  obstacleSize3: {x: 1, y: 1}
-  obstacleCentre3: {x: 0, y: -2}
+  obstacleSize2: {x: 0.25, y: 6}
+  obstacleCentre2: {x: 0, y: 3.5}
+  obstacleSize3: {x: 0.25, y: 6}
+  obstacleCentre3: {x: 0, y: -3.5}
   interactionRadius: 0
   interactionStrength: 0
   compute: {fileID: 7200000, guid: 1c77ce8de78fddb419ed2d15cae41af0, type: 3}
@@ -1185,8 +1185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simulation: {fileID: 283901230}
+  changeScale: 1
   hZ: 1
-  amplitude: 2
+  amplitude: 3
   pauseObject: 0
 --- !u!1 &290508769
 GameObject:

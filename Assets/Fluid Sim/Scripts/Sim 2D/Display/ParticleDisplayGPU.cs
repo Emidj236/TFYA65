@@ -27,9 +27,9 @@ public class ParticleDisplay2D : MonoBehaviour
 
 		argsBuffer = ComputeHelper.CreateArgsBuffer(mesh, sim.positionBuffer.count);
 		bounds = new Bounds(Vector3.zero, Vector3.one * 10000);
-	}
+    }
 
-	void LateUpdate()
+    void LateUpdate()
 	{
 		if (shader != null)
 		{
@@ -51,7 +51,7 @@ public class ParticleDisplay2D : MonoBehaviour
 			material.SetFloat("densityMax", densityDisplayMax);
 			material.SetFloat("densityMin", densityDisplayMin);
 		}
-	}
+    }
 
 	public static void TextureFromGradient(ref Texture2D texture, int width, Gradient gradient, FilterMode filterMode = FilterMode.Bilinear)
 	{

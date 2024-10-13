@@ -23,6 +23,8 @@ public class Simulation2D : MonoBehaviour
     public Vector2 obstacleCentre1;
     public Vector2 obstacleSize2;
     public Vector2 obstacleCentre2;
+    public Vector2 obstacleSize3;
+    public Vector2 obstacleCentre3;
 
     [Header("Interaction Settings")]
     public float interactionRadius;
@@ -51,7 +53,7 @@ public class Simulation2D : MonoBehaviour
     const int updatePositionKernel = 5;
 
     // State
-    bool isPaused;
+    public bool isPaused;
     ParticleSpawner.ParticleSpawnData spawnData;
     bool pauseNextFrame;
 
@@ -164,6 +166,8 @@ public class Simulation2D : MonoBehaviour
         compute.SetVector("obstacleCentre1", obstacleCentre1);
         compute.SetVector("obstacleSize2", obstacleSize2);
         compute.SetVector("obstacleCentre2", obstacleCentre2);
+        compute.SetVector("obstacleSize3", obstacleSize3);
+        compute.SetVector("obstacleCentre3", obstacleCentre3);
 
         compute.SetFloat("Poly6ScalingFactor", 4 / (Mathf.PI * Mathf.Pow(smoothingRadius, 8)));
         compute.SetFloat("SpikyPow3ScalingFactor", 10 / (Mathf.PI * Mathf.Pow(smoothingRadius, 5)));
@@ -231,6 +235,7 @@ public class Simulation2D : MonoBehaviour
         Gizmos.DrawWireCube(Vector2.zero, boundsSize);
         Gizmos.DrawWireCube(obstacleCentre1, obstacleSize1);
         Gizmos.DrawWireCube(obstacleCentre2, obstacleSize2);
+        Gizmos.DrawWireCube(obstacleCentre3, obstacleSize3);
 
         if (Application.isPlaying)
         {
