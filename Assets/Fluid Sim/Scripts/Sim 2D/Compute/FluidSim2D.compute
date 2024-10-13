@@ -19,6 +19,7 @@ RWStructuredBuffer<float2> Velocities;
 RWStructuredBuffer<float2> Densities; // Density, Near Density
 RWStructuredBuffer<uint3> SpatialIndices; // used for spatial hashing
 RWStructuredBuffer<uint> SpatialOffsets; // used for spatial hashing
+RWStructuredBuffer<float2> DensityMaxMin;
 
 // Settings
 const uint numParticles;
@@ -195,7 +196,6 @@ void UpdateDensityDisplay(uint3 id : SV_DispatchThreadID)
 	float2 pos = -boundsSize / 2 + boundsSize * posT;
 	
 	DensityTexture[id.xy] = CalculateDensity(pos)[0];
-
 }
 
 [numthreads(NumThreads,1,1)]

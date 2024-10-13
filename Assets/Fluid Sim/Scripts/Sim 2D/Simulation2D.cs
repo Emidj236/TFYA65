@@ -52,9 +52,6 @@ public class Simulation2D : MonoBehaviour
     bool pauseNextFrame;
 
     public int numParticles { get; private set; }
-
-    public RenderTexture densityTexture;
-
     void Start()
     {
         //Debug.Log("Controls: Space = Play/Pause, R = Reset, LMB = Attract, RMB = Repel");
@@ -72,6 +69,7 @@ public class Simulation2D : MonoBehaviour
         densityBuffer = ComputeHelper.CreateStructuredBuffer<float2>(numParticles);
         spatialIndices = ComputeHelper.CreateStructuredBuffer<uint3>(numParticles);
         spatialOffsets = ComputeHelper.CreateStructuredBuffer<uint>(numParticles);
+        
 
         // Set buffer data
         SetInitialBufferData(spawnData);
@@ -85,11 +83,6 @@ public class Simulation2D : MonoBehaviour
         ComputeHelper.SetBuffer(compute, velocityBuffer, "Velocities", externalForcesKernel, pressureKernel, viscosityKernel, updatePositionKernel);
 
         compute.SetInt("numParticles", numParticles);
-
-        // Texturen
-        ComputeHelper.CreateRenderTexture(ref densityTexture, 1024, 1024);
-        compute.SetTexture(6, "DensityTexture", densityTexture);
-        compute.SetVector("DensityTexSize", new Vector2(densityTexture.width, densityTexture.height));
 
         gpuSort = new();
         gpuSort.SetBuffers(spatialIndices, spatialOffsets);
@@ -149,7 +142,6 @@ public class Simulation2D : MonoBehaviour
         ComputeHelper.Dispatch(compute, numParticles, kernelIndex: pressureKernel);
         ComputeHelper.Dispatch(compute, numParticles, kernelIndex: viscosityKernel);
         ComputeHelper.Dispatch(compute, numParticles, kernelIndex: updatePositionKernel);
-        ComputeHelper.Dispatch(compute, densityTexture);
     }
 
     void UpdateSettings(float deltaTime)

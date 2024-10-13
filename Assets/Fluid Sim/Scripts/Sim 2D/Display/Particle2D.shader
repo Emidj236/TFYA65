@@ -26,6 +26,7 @@ Shader "Instanced/Particle2D" {
 			Texture2D<float4> ColourMap;
 			SamplerState linear_clamp_sampler;
 			float velocityMax;
+			float densityMax;
 
 			struct v2f
 			{
@@ -36,9 +37,13 @@ Shader "Instanced/Particle2D" {
 
 			v2f vert (appdata_full v, uint instanceID : SV_InstanceID)
 			{
-				float speed = length(Velocities[instanceID]);
-				float speedT = saturate(speed / velocityMax);
-				float colT = speedT;
+				float density = DensityData[instanceID].x;
+				float densityT = saturate(density / densityMax);
+				float colT = densityT;
+
+				// float speed = length(Velocities[instanceID]);
+				// float speedT = saturate(speed / velocityMax);
+				// float colT = speedT;
 				
 				float3 centreWorld = float3(Positions2D[instanceID], 0);
 				float3 worldVertPos = centreWorld + mul(unity_ObjectToWorld, v.vertex * scale);
