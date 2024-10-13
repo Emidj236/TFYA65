@@ -36,8 +36,10 @@ const float2 interactionInputPoint;
 const float interactionInputStrength;
 const float interactionInputRadius;
 
-const float2 obstacleSize;
-const float2 obstacleCentre;
+const float2 obstacleSize1;
+const float2 obstacleCentre1;
+const float2 obstacleSize2;
+const float2 obstacleCentre2;
 
 RWTexture2D<float> DensityTexture;
 uint2 DensityTexSize;
@@ -165,18 +167,39 @@ void HandleCollisions(uint particleIndex)
 		vel.y *= -1 * collisionDamping;
 	}
 
+	// Cube 1
 	// Collide particle against the test obstacle
-	const float2 obstacleHalfSize = obstacleSize * 0.5;
-	float2 obstacleEdgeDst = obstacleHalfSize - abs(pos - obstacleCentre);
+	const float2 obstacleHalfSize1 = obstacleSize1 * 0.5;
+	float2 obstacleEdgeDst1 = obstacleHalfSize1 - abs(pos - obstacleCentre1);
 
-	if (obstacleEdgeDst.x >= 0 && obstacleEdgeDst.y >= 0)
+	if (obstacleEdgeDst1.x >= 0 && obstacleEdgeDst1.y >= 0)
 	{
-		if (obstacleEdgeDst.x < obstacleEdgeDst.y) {
-			pos.x = obstacleHalfSize.x * sign(pos.x - obstacleCentre.x) + obstacleCentre.x;
+		if (obstacleEdgeDst1.x < obstacleEdgeDst1.y)
+		{
+			pos.x = obstacleHalfSize1.x * sign(pos.x - obstacleCentre1.x) + obstacleCentre1.x;
 			vel.x *= -1 * collisionDamping;
 		}
 		else {
-			pos.y = obstacleHalfSize.y * sign(pos.y - obstacleCentre.y) + obstacleCentre.y;
+			pos.y = obstacleHalfSize1.y * sign(pos.y - obstacleCentre1.y) + obstacleCentre1.y;
+			vel.y *= -1 * collisionDamping;
+		}
+	}
+	
+	// Cube 2
+	// Collide particle against the test obstacle
+	const float2 obstacleHalfSize2 = obstacleSize2 * 0.5;
+	float2 obstacleEdgeDst2 = obstacleHalfSize2 - abs(pos - obstacleCentre2);
+
+	if (obstacleEdgeDst2.x >= 0 && obstacleEdgeDst2.y >= 0)
+	{
+		if (obstacleEdgeDst2.x < obstacleEdgeDst2.y)
+		{
+			pos.x = obstacleHalfSize2.x * sign(pos.x - obstacleCentre2.x) + obstacleCentre2.x;
+			vel.x *= -1 * collisionDamping;
+		}
+		else
+		{
+			pos.y = obstacleHalfSize2.y * sign(pos.y - obstacleCentre2.y) + obstacleCentre2.y;
 			vel.y *= -1 * collisionDamping;
 		}
 	}

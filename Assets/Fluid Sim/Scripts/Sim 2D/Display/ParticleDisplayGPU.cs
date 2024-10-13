@@ -9,6 +9,7 @@ public class ParticleDisplay2D : MonoBehaviour
 	public int gradientResolution;
 	public float velocityDisplayMax;
 	public float densityDisplayMax;
+	public float densityDisplayMin;
 
 	Material material;
 	ComputeBuffer argsBuffer;
@@ -48,6 +49,7 @@ public class ParticleDisplay2D : MonoBehaviour
 			material.SetFloat("scale", scale);
 			material.SetFloat("velocityMax", velocityDisplayMax);
 			material.SetFloat("densityMax", densityDisplayMax);
+			material.SetFloat("densityMin", densityDisplayMin);
 		}
 	}
 

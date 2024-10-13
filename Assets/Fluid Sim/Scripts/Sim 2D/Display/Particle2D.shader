@@ -27,6 +27,7 @@ Shader "Instanced/Particle2D" {
 			SamplerState linear_clamp_sampler;
 			float velocityMax;
 			float densityMax;
+			float densityMin;
 
 			struct v2f
 			{
@@ -37,7 +38,7 @@ Shader "Instanced/Particle2D" {
 
 			v2f vert (appdata_full v, uint instanceID : SV_InstanceID)
 			{
-				float density = DensityData[instanceID].x;
+				float density = DensityData[instanceID].x - densityMin;
 				float densityT = saturate(density / densityMax);
 				float colT = densityT;
 

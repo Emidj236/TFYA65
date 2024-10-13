@@ -17,8 +17,12 @@ public class Simulation2D : MonoBehaviour
     public float nearPressureMultiplier;
     public float viscosityStrength;
     public Vector2 boundsSize;
-    public Vector2 obstacleSize;
-    public Vector2 obstacleCentre;
+
+    [Header("Obstacles")]
+    public Vector2 obstacleSize1;
+    public Vector2 obstacleCentre1;
+    public Vector2 obstacleSize2;
+    public Vector2 obstacleCentre2;
 
     [Header("Interaction Settings")]
     public float interactionRadius;
@@ -52,6 +56,7 @@ public class Simulation2D : MonoBehaviour
     bool pauseNextFrame;
 
     public int numParticles { get; private set; }
+
     void Start()
     {
         //Debug.Log("Controls: Space = Play/Pause, R = Reset, LMB = Attract, RMB = Repel");
@@ -155,8 +160,10 @@ public class Simulation2D : MonoBehaviour
         compute.SetFloat("nearPressureMultiplier", nearPressureMultiplier);
         compute.SetFloat("viscosityStrength", viscosityStrength);
         compute.SetVector("boundsSize", boundsSize);
-        compute.SetVector("obstacleSize", obstacleSize);
-        compute.SetVector("obstacleCentre", obstacleCentre);
+        compute.SetVector("obstacleSize1", obstacleSize1);
+        compute.SetVector("obstacleCentre1", obstacleCentre1);
+        compute.SetVector("obstacleSize2", obstacleSize2);
+        compute.SetVector("obstacleCentre2", obstacleCentre2);
 
         compute.SetFloat("Poly6ScalingFactor", 4 / (Mathf.PI * Mathf.Pow(smoothingRadius, 8)));
         compute.SetFloat("SpikyPow3ScalingFactor", 10 / (Mathf.PI * Mathf.Pow(smoothingRadius, 5)));
@@ -222,7 +229,8 @@ public class Simulation2D : MonoBehaviour
     {
         Gizmos.color = new Color(0, 1, 0, 0.4f);
         Gizmos.DrawWireCube(Vector2.zero, boundsSize);
-        Gizmos.DrawWireCube(obstacleCentre, obstacleSize);
+        Gizmos.DrawWireCube(obstacleCentre1, obstacleSize1);
+        Gizmos.DrawWireCube(obstacleCentre2, obstacleSize2);
 
         if (Application.isPlaying)
         {
