@@ -1073,20 +1073,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   shader: {fileID: 4800000, guid: 441b7193936682446b30d2140d15792a, type: 3}
-  scale: 0.1
+  scale: 0.05
   colourMap:
     serializedVersion: 2
-    key0: {r: 0.105820596, g: 0.34020147, b: 0.7735849, a: 1}
-    key1: {r: 0.7137255, g: 0.3372549, b: 0.48627454, a: 1}
-    key2: {r: 1, g: 0.1273585, b: 0.22360592, a: 0}
+    key0: {r: 0, g: 0.0025986186, b: 0.4339623, a: 1}
+    key1: {r: 1, g: 0, b: 0.90136623, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 19082
-    ctime1: 35081
-    ctime2: 39128
+    ctime0: 19711
+    ctime1: 21845
+    ctime2: 0
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -1102,12 +1102,12 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 2
     m_ColorSpace: -1
-    m_NumColorKeys: 3
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   gradientResolution: 128
   velocityDisplayMax: 4
-  densityDisplayMax: 120
-  densityDisplayMin: 70
+  densityDisplayMax: 97
+  densityDisplayMin: 94
 --- !u!114 &283901229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,7 +1157,7 @@ MonoBehaviour:
   obstacleCentre3: {x: 0, y: -3.5}
   obstacleSize4: {x: 3, y: 3}
   obstacleCentre4: {x: -5, y: -2}
-  obstacleSize5: {x: 0.25, y: 2}
+  obstacleSize5: {x: 0.25, y: 2.5}
   obstacleCentre5: {x: 0, y: 0}
   interactionRadius: 0
   interactionStrength: 0
