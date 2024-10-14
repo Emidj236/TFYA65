@@ -13,6 +13,7 @@ public class ControllCollider : MonoBehaviour
     public float amplitude;
 
     public bool pauseObject;
+    public bool doubleSquare;
 
     private void Update()
     {
@@ -28,6 +29,14 @@ public class ControllCollider : MonoBehaviour
         else
         {
             Time.timeScale = 0;
+        }
+
+        if(doubleSquare)
+        {
+            simulation.obstacleCentre1 = new Vector2(-5.0f + (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), 1.5f /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
+            simulation.obstacleSize1 = new Vector2((2 * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), (2f * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)));
+            simulation.obstacleCentre4 = new Vector2(-5.0f + (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), -1.5f /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
+            simulation.obstacleSize4 = new Vector2((2 * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), (2f * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)));
         }
         //simulation.obstacleCentre2 = new Vector2(5.0f + (amplitude * Mathf.Cos(hZ * Time.time * Mathf.PI * 2)), 0 /*amplitude * Mathf.Sin(hZ * Time.time * Mathf.PI * 2)*/);
     }
